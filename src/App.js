@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Login from "./components/login.component";
 import SignUp from "./components/signup.component";
 import Forgot from "./components/forgot.component";
+import MovieSearch from "./components/moviesearch.component";
 
 function App() {
   return (<Router>
@@ -36,7 +37,8 @@ function App() {
                       </Switch>
                   </div>
               </div>
-    </div></Router>
+          </div>
+  </Router>
   );
 }
 
