@@ -3,9 +3,10 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import Login from "./components/login.component";
-import SignUp from "./components/signup.component";
-import Forgot from "./components/forgot.component";
+import Login from "./login/login";
+import SignUp from "./login/signup";
+import Forgot from "./login/forgot";
+import Home from "./home/home.js";
 
 function App() {
   return (<Router>
@@ -29,10 +30,16 @@ function App() {
               <div className="auth-wrapper">
                   <div className="auth-inner">
                       <Switch>
+                          //Login
                           <Route exact path='/' component={Login} />
                           <Route path="/sign-in" component={Login} />
                           <Route path="/sign-up" component={SignUp} />
                           <Route path="/forgot" component={Forgot} />
+
+                          //Home
+                          <Route exact path='/' component={Home}/>
+                          <Route path={"/home"} component={Home}/>
+
                       </Switch>
                   </div>
               </div>
