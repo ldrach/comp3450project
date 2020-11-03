@@ -5,7 +5,7 @@ import NavItem from './NavItem';
 import Home from '../home/home';
 import Trending from "../trending/trending"
 import Friends from "../friends/friends"
-import Profile from "../profile/profile"
+import MyProfile from "../myProfile/profile"
 import Login from "../login/login";
 import Compare from "../compare/compare";
 import OtherProfile from "../otherProfile/otherProfile";
@@ -22,7 +22,7 @@ const navItems = [
     {id: 0, name:'Home', icon: ''},
     {id: 1, name:'Trending', icon: ''},
     {id: 2, name:'Friends', icon: ''},
-    {id: 3, name:'Profile', icon: ''},
+    {id: 3, name:'MyProfile', icon: ''},
     {id: 4, name:'Logout', icon: ''}
 ];
 
@@ -83,8 +83,8 @@ const Navbar = () => {
                     return (<Trending />);
                 case 'Friends':
                     return (<Friends />);
-                case 'Profile':
-                    return (<Profile />);
+                case 'MyProfile':
+                    return (<MyProfile />);
                 case 'Logout':
                     return (<Login />);
             }
