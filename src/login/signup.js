@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 
-export default class SignUp extends Component {
+export default class Signup extends Component {
     render() {
         return (
             <form>
                 <h3>Sign Up</h3>
+
+                <div className="form-group">
+                    <label>Username</label>
+                    <input type="text" className="form-control" placeholder="Username" />
+                </div>
 
                 <div className="form-group">
                     <label>First name</label>

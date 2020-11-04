@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
-import './NavBar.css';
+import './navbar.css';
 import '../App.css';
-import {NavContext} from "./NavBar";
+import {NavContext} from "./navbar";
 
 const NavItem = ({item, active, width}) => {
     const navigationContext = useContext(NavContext);
