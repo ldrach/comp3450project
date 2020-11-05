@@ -34,6 +34,7 @@ function App() {
                           <Route path="/sign-in" component={Login} />
                           <Route path="/sign-up" component={SignUp} />
                           <Route path="/forgot" component={Forgot} />
+                          <Route path="/search" component={MovieSearch} />
                       </Switch>
                   </div>
               </div>
