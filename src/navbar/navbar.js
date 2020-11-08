@@ -21,7 +21,7 @@ export default class Navbar extends Component {
                     </ul>
                     <ul className="navbar-nav justify-content-end">
                         <li className="navbar-item">
-                            <Link to="/profile" className="nav-link">Profile</Link>
+                            <Link to="/myprofile" className="nav-link">Profile</Link>
                         </li>
                         <li className="navbar-item">
                             <Link to="/" className="nav-link">Logout</Link>
