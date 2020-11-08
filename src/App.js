@@ -16,7 +16,6 @@ import YourList from "./yourList/yourList";
 
 
 
-
 function App() {
   return (
       <Router>
@@ -31,7 +30,7 @@ function App() {
               <Route exact path="/otherProfile" component={OtherProfile} />
               <Route exact path="/trending" component={Trending} />
               <Route exact path="/yourlist" component={YourList} />
-              {/*<Redirect to="/404" />*/}
+              {/*<Redirect to="/404" /> Can be added for not found redirect*/}
           </Switch>
       </Router>
 
