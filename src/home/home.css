@@ -1,0 +1,36 @@
+.mainDivStyle {
+    position: relative;
+    margin: 3vh 2vh;
+    display: inline-block;
+    border: 0.8vh solid black;
+}
+
+.imageStyle {
+    position: relative;
+}
+
+.blanketStyle {
+    background-color: black;
+    opacity: 0.8;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+}
+
+.imageOverViewStyle {
+    margin: 0.2vh 0.5vh;
+    color: white;
+    overflow: auto;
+    z-index: 1;
+    height: 60%;
+    width: 95%;
+}
+
+.hoverStyle {
+    z-index: 1;
+    color: white;
+    margin: 0.4vh;
+}
