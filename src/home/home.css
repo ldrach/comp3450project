@@ -2,7 +2,7 @@
     position: relative;
     margin: 3vh 2vh;
     display: inline-block;
-    border: 0.8vh solid black;
+    border: 0.4vh solid #5f5e6e;
 }
 
 .imageStyle {
@@ -11,7 +11,7 @@
 
 .blanketStyle {
     background-color: black;
-    opacity: 0.8;
+    opacity: 0.9;
     position: absolute;
     top: 0;
     left: 0;
@@ -32,5 +32,32 @@
 .hoverStyle {
     z-index: 1;
     color: white;
+    margin: 1vh 0.2vh;
+    display: block;
+    width: 80%;
+    word-wrap: break-word;
+}
+
+input[type="text"],
+select.form-control {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #e5bbce;
+    text-align: center;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+input[type="text"]:focus,
+select.form-control:focus {
+    color: white;
+    background: transparent;
+    -webkit-box-shadow: none;
+    border-bottom: 2px solid white;
+    box-shadow: none;
+}
+
+.addToListStyle {
     margin: 0.4vh;
 }
