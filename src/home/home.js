@@ -69,8 +69,8 @@ export default class MovieSearch extends Component {
             <div className="container-fluid">
                 <Navbar/>
 
-                <div>
-                    <input type="text" id="search" className="form-control" aria-label="Search Bar" placeholder="Search Movies" onKeyDown={(event) => this.searchHandler(event)}/>
+                <div className="inputDiv">
+                    <input type="text" id="search" aria-label="Search Bar" placeholder="Search Movies" onKeyDown={(event) => this.searchHandler(event)}/>
                 </div>
 
                 {/* Display movies from search */}

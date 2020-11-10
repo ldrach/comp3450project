@@ -35,6 +35,10 @@
     left: 0.2vh;
 }
 
+.inputDiv {
+    text-align: center;
+}
+
 
 .hoverStyle {
     z-index: 1;
@@ -45,24 +49,23 @@
     word-wrap: break-word;
 }
 
-input[type="text"],
-select.form-control {
+input[type="text"] {
     background: transparent;
+    display: inline-block;
+    color: white;
     border: none;
+    font-size: 2vh;
     border-bottom: 2px solid #e5bbce;
     text-align: center;
-    -webkit-box-shadow: none;
-    box-shadow: none;
     border-radius: 0;
+    margin: 0.8vh auto;
 }
 
-input[type="text"]:focus,
-select.form-control:focus {
+input[type="text"]:focus {
     color: white;
     background: transparent;
-    -webkit-box-shadow: none;
+    display: inline-block;
     border-bottom: 2px solid white;
-    box-shadow: none;
 }
 
 .addToListStyle {
