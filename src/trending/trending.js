@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import Navbar from "../navbar/navbar";
-import './trending.css';
-
+import '../home/home.css';
 
 // AXIOS FOR HTTP REQUEST, BASEURL AND API KEY FOR TMBD
 const axios = require('axios').default;
@@ -68,7 +67,7 @@ export default class MovieSearch extends Component {
             return (
                 <div className="container-fluid">
                     <Navbar/>
-                    <h2 className="trendingMovieStyle">Trending Movies</h2>
+                    <h2 className="trendingTitle">Trending Movies</h2>
                     {/* Display movies from search */}
                     <section>
                         {this.state.isLoaded ? movies.map((item, index) =>
@@ -84,10 +83,10 @@ export default class MovieSearch extends Component {
                                             <div className="blanketStyle">
                                                 <h4 className="hoverStyle">{item.title}</h4>
                                                 <p className="imageOverViewStyle">{item.overview}</p>
-                                                <h6 className="hoverStyle">{item.userReviews === 0 ? 'No Reviews Yet' : `Rating: ${item.userReviews} based on ${item.numOfVotes} votes`}</h6>
-                                                <button className="btn btn-outline-danger btn-sm addToListStyle">Add To
-                                                    List
-                                                </button>
+                                                <div className="ratingAndReviewStyle">
+                                                    <h6 className="hoverStyle">{item.userReviews === 0 ? 'No Reviews Yet' : `Rating: ${item.userReviews} based on ${item.numOfVotes} votes`}</h6>
+                                                    <button className="btn btn-outline-danger btn-sm addToListStyle">Add To List</button>
+                                                </div>
                                             </div> : null}
                                     </div>
                                 </div>

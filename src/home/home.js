@@ -87,8 +87,10 @@ export default class MovieSearch extends Component {
                                     <div className="blanketStyle">
                                         <h4 className="hoverStyle">{item.title}</h4>
                                         <p className="imageOverViewStyle">{item.overview}</p>
-                                        <h6 className="hoverStyle">{item.userReviews === 0 ? 'No Reviews Yet' : `Rating: ${item.userReviews} based on ${item.numOfVotes} votes`}</h6>
-                                        <button className="btn btn-outline-danger btn-sm addToListStyle">Add To List</button>
+                                        <div className="ratingAndReviewStyle">
+                                            <h6 className="hoverStyle">{item.userReviews === 0 ? 'No Reviews Yet' : `Rating: ${item.userReviews} based on ${item.numOfVotes} votes`}</h6>
+                                            <button className="btn btn-outline-danger btn-sm addToListStyle">Add To List</button>
+                                        </div>
                                     </div> : null}
                                 </div>
                             </div>
