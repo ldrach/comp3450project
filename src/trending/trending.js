@@ -9,7 +9,7 @@ const APIKEY = '5cc7ef858dfde24d7396645c83fbacb6';
 const SIZE = "w300";
 const BASEIMGURL = "https://image.tmdb.org/t/p"
 
-export default class MovieSearch extends Component {
+export default class TrendingPage extends Component {
     state = {
         movies: [{
             title: "",
@@ -24,7 +24,7 @@ export default class MovieSearch extends Component {
         isLoaded: false
     }
 
-    // On enter, send query to API thru axios, set state
+    // On mount, send query to API thru axios, set state
     componentDidMount() {
         axios.get(`${BASEURL}trending/movie/week?api_key=${APIKEY}`)
             .then(response => {
@@ -68,7 +68,7 @@ export default class MovieSearch extends Component {
                 <div className="container-fluid">
                     <Navbar/>
                     <h2 className="trendingTitle">Trending Movies</h2>
-                    {/* Display movies from search */}
+                    {/* Display movies once loaded */}
                     <section>
                         {this.state.isLoaded ? movies.map((item, index) =>
                             item.poster == null ? null :
