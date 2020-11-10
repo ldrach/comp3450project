@@ -33,7 +33,7 @@ export default class TrendingPage extends Component {
                     isLoaded: true,
                     movies: response.data.results.map(movie => ({
                         title: movie.title,
-                        poster: movie.poster_path == null ? null : movie.poster_path,
+                        poster: movie.poster_path,
                         overview: movie.overview == null ? 'No Overview' : movie.overview,
                         movieID: movie.id,
                         userReviews: movie.vote_average,
