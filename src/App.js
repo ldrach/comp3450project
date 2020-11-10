@@ -8,8 +8,6 @@ import Signup from "./login/signup";
 import Forgot from "./login/forgot";
 import Home from "./home/home.js";
 
-
-
 function App() {
   return (
       <Router>
