@@ -1,0 +1,7 @@
+.ListContainer{
+    display: flex;
+}
+
+.ListContainer p{
+    margin: 20px;
+}

@@ -1,0 +1,7 @@
+.myListContainer{
+    display: flex;
+}
+
+.myListContainer p{
+    margin: 20px;
+}

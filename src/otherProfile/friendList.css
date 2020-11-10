@@ -1,0 +1,7 @@
+.friendContainer{
+    display: flex;
+}
+
+.friendContainer p{
+    margin: 20px;
+}

@@ -13,6 +13,7 @@ import MyProfile from "./myProfile/myProfile";
 import OtherProfile from "./otherProfile/otherProfile";
 import Trending from "./trending/trending";
 import YourList from "./yourList/yourList";
+import Error404 from "./error404/error404";
 
 
 
@@ -27,10 +28,11 @@ function App() {
               <Route exact path="/compare" component={Compare} />
               <Route exact path="/friends" component={Friends} />
               <Route exact path="/myprofile" component={MyProfile} />
-              <Route exact path="/otherProfile" component={OtherProfile} />
+              <Route exact path="/otherprofile" component={OtherProfile} />
               <Route exact path="/trending" component={Trending} />
               <Route exact path="/yourlist" component={YourList} />
-              {/*<Redirect to="/404" /> Can be added for not found redirect*/}
+              <Route exact path="/Error404" component={Error404} />
+              <Redirect to="/Error404" /> Can be added for not found redirect
           </Switch>
       </Router>
 
