@@ -19,10 +19,10 @@ function App() {
   return (
       <Router>
           <Switch>
-              <Route exact path="/" component={Login} />
+              {/*<Route exact path="/" component={Login} /> changed home to root for prototype*/}
+              <Route exact path="/" component={Home} />
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/forgot" component={Forgot} />
-              <Route exact path="/home" component={Home} />
               <Route exact path="/compare" component={Compare} />
               <Route exact path="/friends" component={Friends} />
               <Route exact path="/myprofile" component={MyProfile} />
