@@ -15,8 +15,6 @@ import Trending from "./trending/trending";
 import YourList from "./yourList/yourList";
 import Error404 from "./error404/error404";
 
-
-
 function App() {
   return (
       <Router>
