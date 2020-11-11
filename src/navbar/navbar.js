@@ -30,6 +30,9 @@ export default class Navbar extends Component {
                             <option value="profile3">Profile 3</option>
                         </select>
                         <li className="navbar-item">
+                            <Link to="/signup" className="nav-link">Sign Up</Link>
+                        </li>
+                        <li className="navbar-item">
                             <Link to="/myprofile" className="nav-link">Profile</Link>
                         </li>
                         {/*<li className="navbar-item">
