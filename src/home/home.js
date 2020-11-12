@@ -14,7 +14,6 @@ export default class MovieSearch extends Component {
         state = {
             movies: [{
                 title: "",
-                popularity: "",
                 poster: "",
                 overview: "",
                 numOfVotes: "",
@@ -54,8 +53,6 @@ export default class MovieSearch extends Component {
         const movie = {
             ...this.state.movies[movieIndex]
         };
-        movie.isHovering = !movie.isHovering;
-
 
         const movies = [...this.state.movies];
         movies[movieIndex] = movie;
