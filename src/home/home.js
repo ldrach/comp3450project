@@ -3,6 +3,7 @@ import Navbar from "../navbar/navbar";
 import './home.css';
 
 
+
 // AXIOS FOR HTTP REQUEST, BASEURL AND API KEY FOR TMBD
 const axios = require('axios').default;
 const BASEURL = 'https://api.themoviedb.org/3/';

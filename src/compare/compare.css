@@ -1,0 +1,41 @@
+h1{
+    padding: 5%;
+    color: white;
+    margin: auto;
+    text-align: center;
+}
+
+td tr{
+    margin: auto;
+    text-align: center;
+    padding: 50px;
+}
+
+table {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    color: white;
+
+}
+
+.outter-wrapper{
+    border-bottom: black solid 1px;
+    padding-bottom: 30px;
+}
+
+.lowerContainer{
+    color:white;
+    text-align: center;
+}
+
+.buttonDiv{
+    width:100%;
+    text-align: center;
+    margin: auto;
+    padding: 50px;
+}
+
+
+
+
