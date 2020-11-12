@@ -54,6 +54,8 @@ export default class MovieSearch extends Component {
             ...this.state.movies[movieIndex]
         };
 
+        movie.isHovering = !movie.isHovering;
+
         const movies = [...this.state.movies];
         movies[movieIndex] = movie;
         this.setState({movies});
