@@ -24,7 +24,7 @@ export default class Navbar extends Component {
                     </ul>
                     <ul className="navbar-nav justify-content-end">
                         <select className="btn btn-secondary">
-                            <option selected={"true"} disabled={"true"}>Select Profile</option>
+                            <option selected= {"true"} disabled={"true"}>Select Profile</option>
                             <option value="profile1">Profile 1</option>
                             <option value="profile2">Profile 2</option>
                             <option value="profile3">Profile 3</option>
