@@ -18,8 +18,7 @@ export default class Compare extends Component {
         chosenMovies: [],
         list1: [],
         list2: [],
-        list1Results: [],
-        list2Results: []
+        mergedList: []
     }
 
     // On enter, send query to API thru axios, set state
@@ -84,7 +83,8 @@ export default class Compare extends Component {
                             title: item.title,
                             poster: item.poster_path,
                             overview: item.overview,
-                            id: item.id
+                            movieID: item.id,
+                            isHovering: false
                         }))
                     })
             })
@@ -96,30 +96,38 @@ export default class Compare extends Component {
                             title: item.title,
                             poster: item.poster_path,
                             overview: item.overview,
-                            id: item.id
+                            movieID: item.id,
+                            isHovering: false
                         }))
                     })
             })
 
-        this.setState({
-            list1Results: list1.map((item) => ({
-                title: item.title,
-                poster: item.poster,
-                overview: item.overview,
-                movieID: item.id,
-                isHovering: false
-            }))
-        })
 
-        this.setState({
-            list2Results: list2.map((item) => ({
-                title: item.title,
-                poster: item.poster,
-                overview: item.overview,
-                movieID: item.id,
-                isHovering: false
-            }))
-        })
+        // Shuffle array from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+        function shuffleMovieList(movieArray) {
+            let currentIndex = movieArray.length, tempValue, randomIndex;
+
+            while (0 !== currentIndex) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+
+                tempValue = movieArray[currentIndex];
+                movieArray[currentIndex] = movieArray[randomIndex];
+                movieArray[randomIndex] = tempValue;
+            }
+            return movieArray;
+        }
+
+        let list1Results = list1.splice(0,5);
+        let list2Results = list2.splice(0,5);
+        let mergeLists = [...list1Results, ...list2Results];
+        shuffleMovieList(mergeLists);
+
+        this.setState({mergedList: [...mergeLists]});
+    }
+
+    displayMoviesList = () => {
+        this.generateList();
     }
 
     clearRecommendations = () => {
@@ -129,43 +137,28 @@ export default class Compare extends Component {
             list1: [],
             list2: [],
             list1Results: [],
-            list2Results: []
+            list2Results: [],
+            mergedList: []
         })
     }
 
     handleMouseHover = (event, id) => {
-        const movieIndex = this.state.list1Results.findIndex(hoveredMovie => {
+        const movieIndex = this.state.mergedList.findIndex(hoveredMovie => {
             return hoveredMovie.movieID === id;
         })
         const movie = {
-            ...this.state.list1Results[movieIndex]
+            ...this.state.mergedList[movieIndex]
         };
 
         movie.isHovering = !movie.isHovering;
 
-        const list1Results = [...this.state.list1Results];
-        list1Results[movieIndex] = movie;
-        this.setState({list1Results});
+        const mergedList = [...this.state.mergedList];
+        mergedList[movieIndex] = movie;
+        this.setState({mergedList});
     }
-
-    handleMouseHover2 = (event, id) => {
-        const movieIndex = this.state.list2Results.findIndex(hoveredMovie => {
-            return hoveredMovie.movieID === id;
-        })
-        const movie = {
-            ...this.state.list2Results[movieIndex]
-        };
-
-        movie.isHovering = !movie.isHovering;
-
-        const list2Results = [...this.state.list2Results];
-        list2Results[movieIndex] = movie;
-        this.setState({list2Results});
-    }
-
 
     render() {
-        let {searchResults, chosenMovies, list1Results, list2Results} = this.state;
+        let {searchResults, chosenMovies, mergedList} = this.state;
 
         return (
             <React.Fragment>
@@ -209,30 +202,13 @@ export default class Compare extends Component {
                 <div className={"lowerContainer"}>
                     <h3 style={{paddingTop: '0.8vh'}}>Results</h3>
                     <section>
-                        {list1Results.length > 1 ? list1Results.map((item, index) =>
+                        {mergedList.length > 1 ? mergedList.map((item, index) =>
                             item.poster == null ? null :
                                 <div className="mainDivStyle rounded" key={index}>
                                     <div onMouseLeave={(event, id=item.movieID) => this.handleMouseHover(event,id)}>
 
                                         <img src={`${BASEIMGURL}/${SIZE}/${item.poster}`} alt="Movie Poster" key={item.movieID} className="imageStyle"
                                              onMouseEnter={(event, id=item.movieID) => this.handleMouseHover(event,id)}
-                                        />
-                                        {item.isHovering ?
-                                            <div className="blanketStyle">
-                                                <h4 className="hoverStyle">{item.title}</h4>
-                                                <p className="imageOverViewStyle">{item.overview}</p>
-                                            </div> : null}
-                                    </div>
-                                </div>
-                        ) : null }
-
-                        {list2Results.length > 1 ? list2Results.map((item, index) =>
-                            item.poster == null ? null :
-                                <div className="mainDivStyle rounded" key={index}>
-                                    <div onMouseLeave={(event, id=item.movieID) => this.handleMouseHover2(event,id)}>
-
-                                        <img src={`${BASEIMGURL}/${SIZE}/${item.poster}`} alt="Movie Poster" key={item.movieID} className="imageStyle"
-                                             onMouseEnter={(event, id=item.movieID) => this.handleMouseHover2(event,id)}
                                         />
                                         {item.isHovering ?
                                             <div className="blanketStyle">
