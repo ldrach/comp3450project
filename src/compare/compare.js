@@ -103,31 +103,20 @@ export default class Compare extends Component {
             })
 
 
-        // Fish-Yates from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-        function shuffleMovieList(movieArray) {
-            let currentIndex = movieArray.length, tempValue, randomIndex;
-
-            while (0 !== currentIndex) {
-                randomIndex = Math.floor(Math.random() * currentIndex);
-                currentIndex -= 1;
-
-                tempValue = movieArray[currentIndex];
-                movieArray[currentIndex] = movieArray[randomIndex];
-                movieArray[randomIndex] = tempValue;
+        // Durstenfeld shuffle from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
             }
-            return movieArray;
         }
 
         let list1Results = list1.splice(0,5);
         let list2Results = list2.splice(0,5);
         let mergeLists = [...list1Results, ...list2Results];
-        shuffleMovieList(mergeLists);
+        shuffleArray(mergeLists);
 
         this.setState({mergedList: [...mergeLists]});
-    }
-
-    displayMoviesList = () => {
-        this.generateList();
     }
 
     clearRecommendations = () => {
@@ -167,18 +156,12 @@ export default class Compare extends Component {
                     <h1>Movie Finder</h1>
                     <table>
                         <tr>
-                            <td>Movie 1</td>
-                            <td>Movie 2</td>
+                            <td>{chosenMovies.length < 1 ? 'Pick 1st Movie' : 'Pick 2nd Movie'}</td>
                         </tr>
                         <tr>
                             <td>
                                 <div className="inputDiv" id="searchbar1">
-                                    <input type="text" aria-label="Search Bar" placeholder="Pick a Movie" onKeyDown={(event) => this.changeSearch(event)}/>
-                                </div>
-                            </td>
-                            <td>
-                                <div className="inputDiv" id="searchbar2">
-                                    <input type="text"  aria-label="Search Bar" placeholder="Pick a Movie" onKeyDown={(event) => this.changeSearch(event)}/>
+                                    <input type="text" aria-label="Search Bar" id="input1" placeholder="Pick a Movie" onKeyDown={(event) => this.changeSearch(event)}/>
                                 </div>
                             </td>
                         </tr>
