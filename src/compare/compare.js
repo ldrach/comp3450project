@@ -103,7 +103,7 @@ export default class Compare extends Component {
             })
 
 
-        // Shuffle array from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+        // Fish-Yates from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
         function shuffleMovieList(movieArray) {
             let currentIndex = movieArray.length, tempValue, randomIndex;
 
@@ -136,8 +136,6 @@ export default class Compare extends Component {
             chosenMovies: [],
             list1: [],
             list2: [],
-            list1Results: [],
-            list2Results: [],
             mergedList: []
         })
     }
