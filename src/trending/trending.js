@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Navbar from "../navbar/navbar";
-import '../home/home.css';
+import "./trending.css";
 
 // AXIOS FOR HTTP REQUEST, BASEURL AND API KEY FOR TMBD
 const axios = require('axios').default;
@@ -65,11 +65,11 @@ export default class TrendingPage extends Component {
             return <div>Loading...</div>
         } else {
             return (
-                <div className="container-fluid">
+                <React.Fragment>
                     <Navbar/>
                     <h2 className="trendingTitle">Trending Movies</h2>
                     {/* Display movies once loaded */}
-                    <section>
+                    <section className={"trendingMovies"}>
                         {this.state.isLoaded ? movies.map((item, index) =>
                             item.poster == null ? null :
                                 <div className="mainDivStyle rounded" key={index}>
@@ -92,7 +92,7 @@ export default class TrendingPage extends Component {
                                 </div>
                         ) : null}
                     </section>
-                </div>
+                </React.Fragment>
             );
         }
     }

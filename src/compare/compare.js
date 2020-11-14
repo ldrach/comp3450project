@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Navbar from "../navbar/navbar";
 import "./compare.css";
+import { Combobox } from 'react-widgets'
+
 
 // AXIOS FOR HTTP REQUEST, BASEURL AND API KEY FOR TMBD
 const axios = require('axios').default;
@@ -51,6 +53,7 @@ export default class Compare extends Component {
 
 
     render() {
+        let colors = ['orange', 'red', 'blue', 'purple']
         return (
             <React.Fragment>
                 <div>
@@ -81,7 +84,7 @@ export default class Compare extends Component {
                     </div>
                 </div>
                 <div className={"lowerContainer"}>
-                    Movie Options
+                   Movie List
                 </div>
             </React.Fragment>
         );

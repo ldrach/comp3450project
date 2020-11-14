@@ -4,16 +4,27 @@ import "./friends.css"
 
 const Friends = () => {
     return (
-        <container>
+        <React.Fragment>
             <Navbar/>
+            <h2 className="friendsTitle">My Friends</h2>
             <div className="upperContainer">
                 <ul>
                     {["Alex", "James", "Andy", "Beth", "Matt"].map((user, idx)=> {
                         return <li key={idx}>{user}</li>
                     })}
                 </ul>
-        </div>
-        </container>
+            </div>
+            <div className="inputDiv">
+                <input type="text" id="friendSearch" aria-label="Search Bar" placeholder="Find Friends"/>
+            </div>
+            <div className={"friendSearchDisplay"}>
+                <ul>
+                    {["Alex", "James", "Andy", "Beth", "Matt"].map((user, idx)=> {
+                        return <li key={idx}>{user}</li>
+                    })}
+                </ul>
+            </div>
+        </React.Fragment>
     );
 };
 
