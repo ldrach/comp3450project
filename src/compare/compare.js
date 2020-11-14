@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import Navbar from "../navbar/navbar";
-import "./compare.css";
 
-// AXIOS FOR HTTP REQUEST, BASEURL AND API KEY FOR TMBD
+// AXIOS, API INFO
 const axios = require('axios').default;
 const BASEURL = 'https://api.themoviedb.org/3/';
 const APIKEY = '5cc7ef858dfde24d7396645c83fbacb6';
@@ -10,80 +9,83 @@ const SIZE = "w300";
 const BASEIMGURL = "https://image.tmdb.org/t/p"
 
 export default class Compare extends Component {
+    state = {
+        searchResults: [{
+            title: '',
+            id: ''
+        }],
+        chosenMovieResult: []
+    }
 
-    // On enter, send query to API thru axios, set state
-    searchHandler = (event) => {
-        if (event.keyCode === 13 && event.target.value !== '') {
+    changeSearch = (event) => {
+        let search = event.target.value;
+        if(search.length > 1) {
             axios.get(`${BASEURL}search/movie?api_key=${APIKEY}&query=${event.target.value}`)
                 .then(response => {
                     console.log(response.data.results);
                     this.setState({
-                        movies: response.data.results.map(movie => ({
-                            title: movie.title,
-                            poster: movie.poster_path == null ? null : movie.poster_path,
-                            overview: movie.overview == null ? 'No Overview' : movie.overview,
-                            movieID: movie.id,
-                            userReviews: movie.vote_average,
-                            numOfVotes: movie.vote_count,
-                            isHovering: false
+                        searchResults: response.data.results.map(movie =>({
+                           title: movie.title,
+                           id: movie.id
                         }))
                     })
                 })
-            event.target.value = ''; // Empty search input
         }
     }
 
-    // On hover change state of hover to allow modal window
-    handleMouseHover = (event, id) => {
-        const movieIndex = this.state.movies.findIndex(hoveredMovie => {
-            return hoveredMovie.movieID === id;
-        })
-        const movie = {
-            ...this.state.movies[movieIndex]
-        };
-        movie.isHovering = !movie.isHovering;
-
-
-        const movies = [...this.state.movies];
-        movies[movieIndex] = movie;
-        this.setState({movies});
+    renderMovieList = () => {
+        let {searchResults} = this.state;
+        if(searchResults.length > 1){
+            return (
+                <div>
+                    <ul>
+                        {searchResults.map((item) => <li style={{color: 'white'}} key={item.id}
+                                                         onClick={() => this.chosenMovie(item.id)}>{item.title}</li>)}
+                    </ul>
+                </div>
+            );
+        }
     }
+
+    chosenMovie = (movieID) =>{
+        axios.get(`${BASEURL}movie/${movieID}?api_key=${APIKEY}&language=en-US`)
+            .then(response => {
+                console.log(response.data);
+                this.setState({
+                    chosenMovieResult: [{
+                        title: response.data.title,
+                        poster: response.data.poster_path,
+                        id: response.data.id
+                    }]
+                })
+            })
+    }
+
+    renderMovie = () => {
+        let {chosenMovieResult} = this.state;
+        console.log(chosenMovieResult.length);
+            return (
+                <div>
+                    {chosenMovieResult.map((item) => item.poster == null ? null :
+                    <div className="mainDivStyle rounded">
+                        <img src={`${BASEIMGURL}/${SIZE}/${item.poster}`} key={item.id} alt=""/>
+                    </div> )}
+                </div>
+            )
+        }
+
 
 
     render() {
         return (
-            <React.Fragment>
+            <div className="container-fluid">
+                <Navbar/>
                 <div>
-                    <Navbar />
+                    <input type="text" aria-label="Search Movie" onChange={(e) => this.changeSearch(e)}/>
+                    {this.renderMovieList()}
+                    {this.renderMovie()}
                 </div>
-                <div className={"outter-wrapper"}>
-                    <h1>Movie Finder</h1>
-                    <table>
-                        <tr>
-                            <td>Movie 1</td>
-                            <td>Movie 2</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div className="inputDiv" id="searchbar1">
-                                    <input type="text" id="search" aria-label="Search Bar" placeholder="Pick a Movie" onKeyDown={(event) => this.searchHandler(event)}/>
-                                </div>
-                            </td>
-                            <td>
-                                <div className="inputDiv" id="searchbar2">
-                                    <input type="text" id="search" aria-label="Search Bar" placeholder="Pick a Movie" onKeyDown={(event) => this.searchHandler(event)}/>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <div className={"buttonDiv"}>
-                    <button className="btn btn-primary btn-md">Compare</button>
-                    </div>
-                </div>
-                <div className={"lowerContainer"}>
-                    Movie Options
-                </div>
-            </React.Fragment>
+            </div>
         );
     }
 }
