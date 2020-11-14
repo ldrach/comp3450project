@@ -15,7 +15,11 @@ export default class Compare extends Component {
 
     state = {
         searchResults: [],
-        chosenMovies: []
+        chosenMovies: [],
+        list1: [],
+        list2: [],
+        list1Results: [],
+        list2Results: []
     }
 
     // On enter, send query to API thru axios, set state
@@ -31,7 +35,6 @@ export default class Compare extends Component {
                         }))
                     })
                 })
-        event.target.value = '';
         }
     }
 
@@ -46,18 +49,19 @@ export default class Compare extends Component {
         })
         axios.get(`${BASEURL}movie/${movieID}?api_key=${APIKEY}&language=en-US`)
             .then(response => {
-                this.setState({
-                    chosenMovies: [...this.state.chosenMovies, {
-                        id: response.data.id,
-                        poster: response.data.poster_path
-                    }]
-                })
+                if(this.state.chosenMovies.length < 2) {
+                    this.setState({
+                        chosenMovies: [...this.state.chosenMovies, {
+                            id: response.data.id,
+                            poster: response.data.poster_path
+                        }]
+                    })
+                }
             })
     }
 
     renderMovie = () => {
         let {chosenMovies} = this.state;
-
         return (
             <div>
                 {chosenMovies ? chosenMovies.map((item,index) => item.poster == null ? <div key={index}><p>This Movie Has No Poster</p></div> :
@@ -68,9 +72,57 @@ export default class Compare extends Component {
         )
     }
 
-    render() {
-        let {searchResults, chosenMovies} = this.state;
+    generateList = () => {
+        let {chosenMovies, list1, list2} = this.state;
+        let movie1 = chosenMovies[0];
+        let movie2 =chosenMovies[1];
 
+        axios.get(`${BASEURL}movie/${movie1.id}/recommendations?api_key=${APIKEY}&language=en-US&page=1`)
+            .then(response => {
+                    this.setState( {
+                        list1: response.data.results.map((item) => ({
+                            title: item.title,
+                            poster: item.poster_path,
+                            overview: item.overview,
+                            id: item.id
+                        }))
+                    })
+            })
+
+        axios.get(`${BASEURL}movie/${movie2.id}/recommendations?api_key=${APIKEY}&language=en-US&page=1`)
+            .then(response => {
+                    this.setState({
+                        list2: response.data.results.map((item) => ({
+                            title: item.title,
+                            poster: item.poster_path,
+                            overview: item.overview,
+                            id: item.id
+                        }))
+                    })
+            })
+
+        this.setState({
+            list1Results: list1.map((item) => ({
+                title: item.title,
+                poster: item.poster,
+                overview: item.overview,
+                id: item.id
+            }))
+        })
+
+        this.setState({
+            list2Results: list2.map((item) => ({
+                title: item.title,
+                poster: item.poster,
+                overview: item.overview,
+                id: item.id
+            }))
+        })
+    }
+
+
+    render() {
+        let {searchResults, chosenMovies, list1Results, list2Results} = this.state;
 
         return (
             <React.Fragment>
@@ -87,7 +139,7 @@ export default class Compare extends Component {
                         <tr>
                             <td>
                                 <div className="inputDiv" id="searchbar1">
-                                    <input type="text" aria-label="Search Bar" required placeholder="Pick a Movie" onKeyDown={(event) => this.changeSearch(event)}/>
+                                    <input type="text" aria-label="Search Bar" placeholder="Pick a Movie" onKeyDown={(event) => this.changeSearch(event)}/>
                                 </div>
                             </td>
                             <td>
@@ -98,18 +150,35 @@ export default class Compare extends Component {
                         </tr>
                     </table>
                     <div className={"buttonDiv"}>
-                    <button className="btn btn-primary btn-md">Compare</button>
+                    <button className="btn btn-primary btn-md" onClick={this.generateList}>Get Recommendations</button>
                     </div>
+
+                    <h3 style={{textAlign: 'center', color: 'white'}}>Options</h3>
+                    <Dropdown fluid selection
+                              placeholder={searchResults.length > 1 ? 'Choose from List' : 'Enter a movie in the search bar'}
+                              options={searchResults}
+                              onChange={(event, key) => this.chosenMovie(event, key)}
+                    />
+                    {chosenMovies.length > 0 ? <div style={{textAlign: 'center'}}>{this.renderMovie()}</div> : null}
+
                 </div>
                 <div className={"lowerContainer"}>
-                    User 1 Options
-                    <Dropdown fluid selection
-                        placeholder={searchResults.length > 1 ? 'Choose from List' : 'Enter a movie in the search bar'}
-                        defaultValue='Batman'
-                        options={searchResults}
-                        onChange={(event, key) => this.chosenMovie(event, key)}
-                    />
-                    {chosenMovies.length > 0 ? this.renderMovie() : null}
+                    <h3>Results</h3>
+                    <section>
+                        {list1Results.length > 1 ? list1Results.map((item, index) =>
+                            item.poster == null ? null :
+                                <div className="mainDivStyle rounded" key={index}>
+                                    <img src={`${BASEIMGURL}/${SIZE}/${item.poster}`} alt="Movie Poster" key={item.movieID} className="imageStyle"/>
+                                </div>
+                        ) : null }
+
+                        {list2Results.length > 1 ? list2Results.map((item, index) =>
+                            item.poster == null ? null :
+                                <div className="mainDivStyle rounded" key={index}>
+                                        <img src={`${BASEIMGURL}/${SIZE}/${item.poster}`} alt="Movie Poster" key={item.movieID} className="imageStyle"/>
+                                </div>
+                        ) : null }
+                    </section>
                 </div>
             </React.Fragment>
         );
