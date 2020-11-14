@@ -1,3 +1,35 @@
+/* Friends Page Title */
+.friendsTitle {
+    color: white;
+    margin: 1.2vh 3vh;
+    text-align: left;
+    border-bottom: 2px solid white;
+    display: inline-block;
+}
+
 .upperContainer {
+    color:white;
+}
+
+#friendSearch {
+    background: transparent;
+    display: inline-block;
+    color: white;
+    border: none;
+    font-size: 2vh;
+    border-bottom: 2px solid #e5bbce;
+    text-align: center;
+    border-radius: 0;
+    margin: 0.8vh auto;
+}
+
+#friendSearch:focus {
+    color: white;
+    background: transparent;
+    display: inline-block;
+    border-bottom: 2px solid white;
+}
+
+.friendSearchDisplay{
     color:white;
 }

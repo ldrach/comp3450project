@@ -1,7 +1,44 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export default class Navbar extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.onChangeUsername = this.onChangeUsername.bind(this);
+
+        this.state = {
+            username: '',
+            password: '',
+            firstname: '',
+            lastname: '',
+            email: '',
+            user: []
+        }
+    }
+
+    onChangeUsername(e) {
+        this.setState({
+            username: e.target.value
+        })
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:5000/users/')
+            .then(response => {
+                if (response.data.length > 0) {
+                    this.setState({
+                        user: response.data.map(user => user.username),
+                        username: response.data[0].username
+                    })
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
 
     render() {
         return (
@@ -23,11 +60,18 @@ export default class Navbar extends Component {
                         </li>
                     </ul>
                     <ul className="navbar-nav justify-content-end">
-                        <select className="btn btn-secondary">
-                            <option selected={"true"} disabled={"true"}>Select Profile</option>
-                            <option value="profile1">Profile 1</option>
-                            <option value="profile2">Profile 2</option>
-                            <option value="profile3">Profile 3</option>
+                        <select
+                            required
+                            className="btn btn-secondary"
+                            value = {this.state.username}
+                            onChange = {this.onChangeUsername}>
+                            {
+                                this.state.user.map(function(user) {
+                                    return <option>
+                                        {user}
+                                    </option>
+                                })
+                            }
                         </select>
                         <li className="navbar-item">
                             <Link to="/signup" className="nav-link">Sign Up</Link>

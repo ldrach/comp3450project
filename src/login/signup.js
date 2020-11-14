@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from 'axios';
 import {Link} from "react-router-dom";
 
+
 export default class Signup extends Component {
     constructor(props) {
         super(props);
@@ -142,7 +143,7 @@ export default class Signup extends Component {
 
                             <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
                             <p className="forgot-password text-right">
-                                Already registered? <a href="/">sign in</a>
+                                Already registered? <a href="#">Login here</a>
                             </p>
                         </form>
                     </div>

@@ -1,0 +1,17 @@
+/* Trending Page Title */
+.trendingTitle {
+    color: white;
+    margin: 1.2vh 3vh;
+    text-align: left;
+    border-bottom: 2px solid white;
+    display: inline-block;
+}
+
+.container-fluid{
+    width:100%;
+}
+
+.trendingMovies{
+    text-align: center;
+    margin: auto;
+}

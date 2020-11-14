@@ -66,15 +66,14 @@ export default class MovieSearch extends Component {
         let movie = this.state.movies;
 
         return (
-            <div className="container-fluid">
+            <React.Fragment>
                 <Navbar/>
-
+                <h2 className="homeTitle">Search Movies</h2>
                 <div className="inputDiv">
                     <input type="text" id="search" aria-label="Search Bar" placeholder="Search Movies" onKeyDown={(event) => this.searchHandler(event)}/>
                 </div>
-
                 {/* Display movies from search */}
-                <section>
+                <section className={"homeMovies"}>
                     {movie.length > 1 ? movie.map((item, index) =>
                         item.poster == null ? null :
                             <div className="mainDivStyle rounded" key={index}>
@@ -96,7 +95,7 @@ export default class MovieSearch extends Component {
                             </div>
                     ) : null }
                 </section>
-            </div>
+            </React.Fragment>
         );
     }
 }

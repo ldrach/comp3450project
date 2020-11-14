@@ -37,6 +37,8 @@
 
 .inputDiv {
     text-align: center;
+    margin: 6%;
+
 }
 
 
@@ -49,7 +51,7 @@
     word-wrap: break-word;
 }
 
-input[type="text"] {
+#search {
     background: transparent;
     display: inline-block;
     color: white;
@@ -61,7 +63,7 @@ input[type="text"] {
     margin: 0.8vh auto;
 }
 
-input[type="text"]:focus {
+#search:focus {
     color: white;
     background: transparent;
     display: inline-block;
@@ -72,8 +74,13 @@ input[type="text"]:focus {
     margin: 0.4vh;
 }
 
-/* Trending Page Title */
-.trendingTitle {
+.homeMovies{
+    text-align: center;
+    margin: auto;
+}
+
+/* Home Page Title */
+.homeTitle {
     color: white;
     margin: 1.2vh 3vh;
     text-align: left;
