@@ -2,14 +2,13 @@ import React, {Component} from "react";
 import Navbar from "../navbar/navbar";
 import './home.css';
 
-
-
 // AXIOS FOR HTTP REQUEST, BASEURL AND API KEY FOR TMBD
 const axios = require('axios').default;
 const BASEURL = 'https://api.themoviedb.org/3/';
 const APIKEY = '5cc7ef858dfde24d7396645c83fbacb6';
 const SIZE = "w300";
 const BASEIMGURL = "https://image.tmdb.org/t/p"
+
 
 export default class MovieSearch extends Component {
         state = {
@@ -23,6 +22,7 @@ export default class MovieSearch extends Component {
                 isHovering: false
             }]
         }
+
 
     // On enter, send query to API thru axios, set state
     searchHandler = (event) => {
@@ -63,7 +63,7 @@ export default class MovieSearch extends Component {
     }
 
     render() {
-        let movie = this.state.movies;
+        let {movies} = this.state;
 
         return (
             <div className="container-fluid">
@@ -75,7 +75,7 @@ export default class MovieSearch extends Component {
 
                 {/* Display movies from search */}
                 <section>
-                    {movie.length > 1 ? movie.map((item, index) =>
+                    {movies.length > 1 ? movies.map((item, index) =>
                         item.poster == null ? null :
                             <div className="mainDivStyle rounded" key={index}>
                                 <div onMouseLeave={(event, id=item.movieID) => this.handleMouseHover(event,id)}>

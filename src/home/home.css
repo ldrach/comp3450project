@@ -27,6 +27,7 @@
     z-index: 1;
     height: 60%;
     width: 95%;
+    font-size: 1.3vh;
 }
 
 .ratingAndReviewStyle {
@@ -41,7 +42,10 @@
 
 
 .hoverStyle {
+    padding-top: 1.5vh;
+    padding-left: 0.3vh;
     z-index: 1;
+    font-size: 1.8vh;
     color: white;
     margin: 1vh 0.2vh;
     display: block;

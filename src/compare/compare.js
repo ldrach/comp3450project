@@ -8,7 +8,7 @@ import {Dropdown} from "semantic-ui-react";
 const axios = require('axios').default;
 const BASEURL = 'https://api.themoviedb.org/3/';
 const APIKEY = '5cc7ef858dfde24d7396645c83fbacb6';
-const SIZE = "w185";
+const SIZE = "w300";
 const BASEIMGURL = "https://image.tmdb.org/t/p"
 
 export default class Compare extends Component {
@@ -34,6 +34,7 @@ export default class Compare extends Component {
                         }))
                     })
                 })
+            event.target.value = '';
         }
     }
 
@@ -65,7 +66,7 @@ export default class Compare extends Component {
             <div>
                 {chosenMovies ? chosenMovies.map((item,index) => item.poster == null ? <div key={index}><p>This Movie Has No Poster</p></div> :
                     <div className="mainDivStyle rounded" key={index}>
-                        <img src={`${BASEIMGURL}/${SIZE}/${item.poster}`} key={item.id} alt=""/>
+                        <img src={`${BASEIMGURL}/w185/${item.poster}`} key={item.id} alt=""/>
                     </div> ) : null}
             </div>
         )
@@ -166,9 +167,10 @@ export default class Compare extends Component {
                             </td>
                         </tr>
                     </table>
+
                     <div className={"buttonDiv"}>
-                    <button className="btn btn-primary btn-md" style={{margin: '0.4vh'}} onClick={chosenMovies.length > 1 ? this.generateList : null}>Get Recommendations</button>
-                    <button className="btn btn-danger btn-md" style={{margin: '0.4vh'}} onClick={this.clearRecommendations}>Clear Recommendations</button>
+                        <button className="btn btn-primary btn-md" style={{margin: '0.4vh'}} onClick={chosenMovies.length > 1 ? this.generateList : null}>Get Recommendations</button>
+                        <button className="btn btn-danger btn-md" style={{margin: '0.4vh'}} onClick={this.clearRecommendations}>Clear Recommendations</button>
                     </div>
 
                     <h3 style={{textAlign: 'center', color: 'white'}}>Recommended List Options</h3>
