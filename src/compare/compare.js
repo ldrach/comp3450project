@@ -106,7 +106,8 @@ export default class Compare extends Component {
                 title: item.title,
                 poster: item.poster,
                 overview: item.overview,
-                id: item.id
+                movieID: item.id,
+                isHovering: false
             }))
         })
 
@@ -115,9 +116,51 @@ export default class Compare extends Component {
                 title: item.title,
                 poster: item.poster,
                 overview: item.overview,
-                id: item.id
+                movieID: item.id,
+                isHovering: false
             }))
         })
+    }
+
+    clearRecommendations = () => {
+        this.setState({
+            searchResults: [],
+            chosenMovies: [],
+            list1: [],
+            list2: [],
+            list1Results: [],
+            list2Results: []
+        })
+    }
+
+    handleMouseHover = (event, id) => {
+        const movieIndex = this.state.list1Results.findIndex(hoveredMovie => {
+            return hoveredMovie.movieID === id;
+        })
+        const movie = {
+            ...this.state.list1Results[movieIndex]
+        };
+
+        movie.isHovering = !movie.isHovering;
+
+        const list1Results = [...this.state.list1Results];
+        list1Results[movieIndex] = movie;
+        this.setState({list1Results});
+    }
+
+    handleMouseHover2 = (event, id) => {
+        const movieIndex = this.state.list2Results.findIndex(hoveredMovie => {
+            return hoveredMovie.movieID === id;
+        })
+        const movie = {
+            ...this.state.list2Results[movieIndex]
+        };
+
+        movie.isHovering = !movie.isHovering;
+
+        const list2Results = [...this.state.list2Results];
+        list2Results[movieIndex] = movie;
+        this.setState({list2Results});
     }
 
 
@@ -150,10 +193,11 @@ export default class Compare extends Component {
                         </tr>
                     </table>
                     <div className={"buttonDiv"}>
-                    <button className="btn btn-primary btn-md" onClick={this.generateList}>Get Recommendations</button>
+                    <button className="btn btn-primary btn-md" style={{margin: '0.4vh'}} onClick={chosenMovies.length > 1 ? this.generateList : null}>Get Recommendations</button>
+                    <button className="btn btn-danger btn-md" style={{margin: '0.4vh'}} onClick={this.clearRecommendations}>Clear Recommendations</button>
                     </div>
 
-                    <h3 style={{textAlign: 'center', color: 'white'}}>Options</h3>
+                    <h3 style={{textAlign: 'center', color: 'white'}}>Recommended List Options</h3>
                     <Dropdown fluid selection
                               placeholder={searchResults.length > 1 ? 'Choose from List' : 'Enter a movie in the search bar'}
                               options={searchResults}
@@ -163,19 +207,39 @@ export default class Compare extends Component {
 
                 </div>
                 <div className={"lowerContainer"}>
-                    <h3>Results</h3>
+                    <h3 style={{paddingTop: '0.8vh'}}>Results</h3>
                     <section>
                         {list1Results.length > 1 ? list1Results.map((item, index) =>
                             item.poster == null ? null :
                                 <div className="mainDivStyle rounded" key={index}>
-                                    <img src={`${BASEIMGURL}/${SIZE}/${item.poster}`} alt="Movie Poster" key={item.movieID} className="imageStyle"/>
+                                    <div onMouseLeave={(event, id=item.movieID) => this.handleMouseHover(event,id)}>
+
+                                        <img src={`${BASEIMGURL}/${SIZE}/${item.poster}`} alt="Movie Poster" key={item.movieID} className="imageStyle"
+                                             onMouseEnter={(event, id=item.movieID) => this.handleMouseHover(event,id)}
+                                        />
+                                        {item.isHovering ?
+                                            <div className="blanketStyle">
+                                                <h4 className="hoverStyle">{item.title}</h4>
+                                                <p className="imageOverViewStyle">{item.overview}</p>
+                                            </div> : null}
+                                    </div>
                                 </div>
                         ) : null }
 
                         {list2Results.length > 1 ? list2Results.map((item, index) =>
                             item.poster == null ? null :
                                 <div className="mainDivStyle rounded" key={index}>
-                                        <img src={`${BASEIMGURL}/${SIZE}/${item.poster}`} alt="Movie Poster" key={item.movieID} className="imageStyle"/>
+                                    <div onMouseLeave={(event, id=item.movieID) => this.handleMouseHover2(event,id)}>
+
+                                        <img src={`${BASEIMGURL}/${SIZE}/${item.poster}`} alt="Movie Poster" key={item.movieID} className="imageStyle"
+                                             onMouseEnter={(event, id=item.movieID) => this.handleMouseHover2(event,id)}
+                                        />
+                                        {item.isHovering ?
+                                            <div className="blanketStyle">
+                                                <h4 className="hoverStyle">{item.title}</h4>
+                                                <p className="imageOverViewStyle">{item.overview}</p>
+                                            </div> : null}
+                                    </div>
                                 </div>
                         ) : null }
                     </section>
