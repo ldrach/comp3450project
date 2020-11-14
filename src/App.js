@@ -30,7 +30,7 @@ function App() {
               <Route exact path="/trending" component={Trending} />
               <Route exact path="/yourlist" component={YourList} />
               <Route exact path="/Error404" component={Error404} />
-              <Redirect to="/Error404" /> Can be added for not found redirect
+              <Redirect to="/Error404" />
           </Switch>
       </Router>
 
