@@ -31,7 +31,10 @@ export default class Navbar extends Component {
                 if (response.data.length > 0) {
                     this.setState({
                         user: response.data.map(user => user.username),
-                        username: response.data[0].username
+                        username: response.data[0].username,
+                        firstname: response.data[0].firstname,
+                        lastname: response.data[0].lastname,
+                        email: response.data[0].email
                     })
                 }
             })
@@ -77,7 +80,7 @@ export default class Navbar extends Component {
                             <Link to="/signup" className="nav-link">Sign Up</Link>
                         </li>
                         <li className="navbar-item">
-                            <Link to="/myprofile" className="nav-link">Profile</Link>
+                            <Link to="/myProfile" className="nav-link">Profile</Link>
                         </li>
                         {/*<li className="navbar-item">
                             <Link to="/" className="nav-link">Logout</Link>
