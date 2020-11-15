@@ -1,9 +1,9 @@
 {
   "name": "comp3450project",
   "version": "0.1.0",
+  "main": "App.js",
   "private": true,
   "dependencies": {
-    "-": "0.0.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -48,5 +48,9 @@
   },
   "devDependencies": {
     "react-router-dom": "^5.2.0"
+  },
+  "engines": {
+    "node": "12.19.0",
+    "npm": "6.14.8"
   }
 }
