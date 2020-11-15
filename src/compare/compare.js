@@ -157,14 +157,24 @@ export default class Compare extends Component {
                     <h1>Movie Finder</h1>
                     <table>
                         <tr>
-                            <td>{chosenMovies.length < 1 ? 'Pick 1st Movie' : 'Pick 2nd Movie'}</td>
+                            <h3>{chosenMovies.length < 1 ? 'Pick 1st Movie' : 'Pick 2nd Movie'}</h3>
                         </tr>
                         <tr>
                             <td>
-                                <div className="inputDiv" id="searchbar1">
-                                    <input type="text" aria-label="Search Bar" id="input1" placeholder="Pick a Movie" onKeyDown={(event) => this.changeSearch(event)}/>
+                                <div className="inputDiv" >
+                                    <input type="text" aria-label="Search Bar" id="compareSearch" placeholder="Pick a Movie" onKeyDown={(event) => this.changeSearch(event)}/>
                                 </div>
                             </td>
+                        </tr>
+                        <tr>
+                            <h3 style={{textAlign: 'center', color: 'white'}}>Movies</h3>
+                            <Dropdown fluid selection
+                                      placeholder={searchResults.length > 1 ? 'Choose from List' : 'Enter a movie in the search bar'}
+                                      options={searchResults}
+                                      onChange={(event, key) => this.chosenMovie(event, key)}
+
+                            />
+                            {chosenMovies.length > 0 ? <div style={{textAlign: 'center'}}>{this.renderMovie()}</div> : null}
                         </tr>
                     </table>
 
@@ -173,13 +183,7 @@ export default class Compare extends Component {
                         <button className="btn btn-danger btn-md" style={{margin: '0.4vh'}} onClick={this.clearRecommendations}>Clear Recommendations</button>
                     </div>
 
-                    <h3 style={{textAlign: 'center', color: 'white'}}>Recommended List Options</h3>
-                    <Dropdown fluid selection
-                              placeholder={searchResults.length > 1 ? 'Choose from List' : 'Enter a movie in the search bar'}
-                              options={searchResults}
-                              onChange={(event, key) => this.chosenMovie(event, key)}
-                    />
-                    {chosenMovies.length > 0 ? <div style={{textAlign: 'center'}}>{this.renderMovie()}</div> : null}
+
 
                 </div>
                 <div className={"lowerContainer"}>
