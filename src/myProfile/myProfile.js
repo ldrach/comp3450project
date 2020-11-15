@@ -100,9 +100,6 @@ export default class myProfile extends Component {
                             <div>
                                 <h5>{this.state.email}</h5>
                             </div>
-                            <div>
-                                <h5>{this.state.user}</h5>
-                            </div>
                         </div>
                     </div>
                     <div className="midContainer">
